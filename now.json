@@ -1,0 +1,17 @@
+{
+    "version": 2,
+    "name": "royuutil",
+    "alias": ["royuutil"],
+    "builds": [{
+        "src": "functions/*.js",
+        "use": "@now/node"
+    }],
+    "routes": [{
+        "src": "/api/sha2",
+        "dest": "/functions/sha2.js"
+    }, {
+        "src": "/api/(.*)",
+        "dest": "/functions/$1.js"
+    }],
+    "public": true
+}
