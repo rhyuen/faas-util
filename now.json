@@ -5,6 +5,9 @@
     "builds": [{
         "src": "functions/*.js",
         "use": "@now/node"
+    }, {
+        "src": "public/index.html",
+        "use": "@now/static"
     }],
     "routes": [{
         "src": "/api/sha2",
@@ -12,6 +15,9 @@
     }, {
         "src": "/api/(.*)",
         "dest": "/functions/$1.js"
+    }, {
+        "src": "/(.*)",
+        "dest": "public/$1"
     }],
     "public": true
 }

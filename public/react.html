@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>royu util</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: lavender;
+            margin: 0;
+            height: auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: minmax(20px, 1fr) repeat(12, minmax(auto, 90px)) minmax(20px, 1fr);
+        }
+
+        nav {
+            grid-column: 1/span 14;
+            background: palegoldenrod;
+            height: 5vh;
+        }
+
+        .gutter--start {
+            grid-column: 1/span 1;
+            height: 95vh;
+            background: palevioletred;
+        }
+
+        .main {
+            grid-column: 2 / span 12;
+            height: 95vh;
+            background: papayawhip;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+        }
+
+        .gutter--end {
+            grid-column: 14/span 1;
+            height: 95vh;
+            background: paleturquoise;
+        }
+
+        .profile {
+            grid-column: 1/span 3;
+            background: white;
+            padding: 10px;
+            border: 1px solid black;
+        }
+
+        .feed {
+            grid-column: 4/span 6;
+            background: white;
+            padding: 10px;
+            border: 1px solid black;
+        }
+
+        .ads {
+            grid-column: 10/span 3;
+            background: white;
+            padding: 10px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grid">
+        <nav>navigation</nav>
+        <div class="gutter--start"></div>
+        <div class="main">
+            <aside class="profile">
+                <p>For react and axios in a hurry.</p>
+            </aside>
+            <div class="feed">
+                <h1>Mount point is below</h1>
+                <div id="app"></div>
+            </div>
+            <aside class="ads">
+                lists go here.
+            </aside>
+        </div>
+        <div class="gutter--end"></div>
+    </div>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+    <script type="text/babel">
+        class App extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {
+                    name: "react",
+                    email: "batman@batman.ca"
+                }
+                this.handleSubmit = this.handleSubmit.bind(this);
+                this.handleChange = this.handleChange.bind(this);
+            }            
+
+            handleChange = e => {
+                const {value, name} = e.target;
+                this.setState({
+                    [name]: value
+                });
+            }
+
+            handleSubmit = e => {
+                e.preventDefault();
+                const {email} = this.state;
+                axios.post("/.netlify/functions/createEmail", {email: email})
+                    .then(res => {
+                        console.log(res.data);
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    }).finally(() => {
+                        this.setState({
+                            email: ""
+                        });
+                    });
+            }
+
+            render(){
+                return (
+                    <div>
+                        <h1>hi, it's react.</h1>
+                        <p>this is state: {this.state.name}</p>
+                        <form onSubmit = {this.handleSubmit}>
+                            <input type = "text" 
+                                name = "email" 
+                                value = {this.state.email} 
+                                onChange = {this.handleChange}
+                                placeholder = "email@email.ca"/>
+                            <input type = "submit"/>
+                        </form>
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(<App/>, document.getElementById("app"))
+    </script>
+</body>
+
+</html>

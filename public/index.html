@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>royu util</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: lavender;
+            margin: 0;
+            height: auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: minmax(20px, 1fr) repeat(12, minmax(auto, 90px)) minmax(20px, 1fr);
+        }
+
+        nav {
+            grid-column: 1/span 14;
+            background: palegoldenrod;
+            height: 5vh;
+        }
+
+        .gutter--start {
+            grid-column: 1/span 1;
+            height: 95vh;
+            background: palevioletred;
+        }
+
+        .main {
+            grid-column: 2 / span 12;
+            height: 95vh;
+            background: papayawhip;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+        }
+
+        .gutter--end {
+            grid-column: 14/span 1;
+            height: 95vh;
+            background: paleturquoise;
+        }
+
+        .profile {
+            grid-column: 1/span 3;
+            background: white;
+            padding: 10px;
+            border: 1px solid black;
+        }
+
+        .feed {
+            grid-column: 4/span 6;
+            background: white;
+            padding: 10px;
+            border: 1px solid black;
+        }
+
+        .ads {
+            grid-column: 10/span 3;
+            background: white;
+            padding: 10px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grid">
+        <nav>navigation</nav>
+        <div class="gutter--start"></div>
+        <div class="main">
+            <aside class="profile">
+                just a list of utilities to minimize searching.
+            </aside>
+            <div class="feed">
+                <p>
+                    goto: /api/uuid for a uuid <br />
+                    <a href="/api/uuid">Click to Go</a>
+                </p>
+                <p>
+                    goto: /api/sha2 for a sha2 hash of a query parameter.<br />
+                    <a href="/api/sha2">Click to Go</a>
+                </p>
+            </div>
+            <aside class="ads">
+                lists go here.
+            </aside>
+        </div>
+        <div class="gutter--end"></div>
+    </div>
+</body>
+
+</html>
