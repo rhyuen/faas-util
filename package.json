@@ -1,5 +1,8 @@
 {
   "name": "royu-faas-util",
+  "engines": {
+    "node": "10.x"
+  },
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,6 +14,10 @@
   "license": "ISC",
   "dependencies": {
     "micro": "9.3.3",
+    "micro-cors": "0.1.1",
     "uuid": "3.3.2"
+  },
+  "devDependencies": {
+    "@now/node": "0.11.1"
   }
 }
